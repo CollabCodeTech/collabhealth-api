@@ -7,24 +7,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Equipment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private final String name;
-	private final String criticalness;
-	private final String brand;
-	private final String model;
-	private final String tag;
-	private final String serialNumber;
-	private final String owner;
-	private final String area;
-	private final String sector;
+	private String name;
+	private String criticalness;
+	private String brand;
+	private String model;
+	private String tag;
+	private String serialNumber;
+	private String owner;
+	private String area;
+	private String sector;
 	private LocalDate preventiveMaintenenceDate;
 	private LocalDate calibrationDate;
 	private LocalDate electricalSafetyTestDate;

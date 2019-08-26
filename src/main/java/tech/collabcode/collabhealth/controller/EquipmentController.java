@@ -1,9 +1,11 @@
 package tech.collabcode.collabhealth.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +24,14 @@ public class EquipmentController {
 	@PostMapping
 	public ResponseEntity<Equipment> create(@RequestBody Equipment equipment, UriComponentsBuilder uriBuilder) {
 		Equipment savedEquipment = this.equipmentRepository.save(equipment);
-		
+
 		URI path = uriBuilder.path("/api/equipments/{id}").buildAndExpand(savedEquipment.getId()).toUri();
 		return ResponseEntity.created(path).body(savedEquipment);
+	}
+
+	@GetMapping
+	public ResponseEntity<List<Equipment>> list() {
+		List<Equipment> allEquipments = this.equipmentRepository.findAll();
+		return ResponseEntity.ok(allEquipments);
 	}
 }
